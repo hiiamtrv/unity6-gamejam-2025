@@ -12,10 +12,12 @@ namespace Bubble
 
         private void Update()
         {
+            if (!GameManager.GameManager.IsPlaying) return;
+            
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                GenBubble();
+                GenerateBubble();
                 ResetTimer();
             }
         }
@@ -25,7 +27,7 @@ namespace Bubble
             timer = Random.Range(generateIntervals.x, generateIntervals.y);
         }
 
-        private void GenBubble()
+        private void GenerateBubble()
         {
             var newBubble = Instantiate(prefabBubble, transform.position, Quaternion.identity);
 

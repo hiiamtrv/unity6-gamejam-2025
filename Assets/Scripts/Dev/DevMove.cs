@@ -23,6 +23,8 @@ namespace Dev
 
         private void Update()
         {
+            if (!GameManager.GameManager.IsPlaying) return;
+            
             transform.position += offset * Time.deltaTime;
         }
     }
