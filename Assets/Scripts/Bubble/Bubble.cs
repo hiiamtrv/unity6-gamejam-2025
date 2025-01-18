@@ -44,7 +44,7 @@ public class Bubble : MonoBehaviour
         Vector3 newScale = new Vector3(1, 1, 1);
         if(level >= 2)
             newScale = new Vector3(1 + (level-1) * bubbleSizeIncrease, 1 + (level - 1) * bubbleSizeIncrease, 1);
-        transform.DOScale(newScale, scaleTime);
+        transform.DOScale(newScale, scaleTime).SetEase(Ease.OutBounce);
         float offset = Random.Range(-0.5f, 0.5f);
         upSpeed *= level;
         upSpeed += offset;

@@ -123,13 +123,14 @@ public class BubbleManager : MonoBehaviour
 
         newComponent.SetColorIndex(((bubble1ColorIndex + bubble2ColorIndex) / 2) % 12);
 
-        /*bubble1.transform.DOMove(newBubble.transform.position, 0.5f);
-        bubble1.transform.DOScale(newBubble.transform.localScale, 0.5f);
-        bubble2.transform.DOMove(newBubble.transform.position, 0.5f);
-        bubble2.transform.DOScale(newBubble.transform.localScale, 0.5f);*/
+        bubble1.transform.DOMove(newBubble.transform.position, 0.2f);
+        bubble1.transform.DOScale(newBubble.transform.localScale, 0.2f).OnComplete(() => bubble1Component.Pop()); ;
+        bubble2.transform.DOMove(newBubble.transform.position, 0.2f);
+        bubble2.transform.DOScale(newBubble.transform.localScale, 0.2f).OnComplete(() => bubble2Component.Pop());
 
-        bubble1Component.Pop();
-        bubble2Component.Pop();
+        bubble1.GetComponent<Collider2D>().enabled = false;
+        bubble2.GetComponent<Collider2D>().enabled = false;
+
     }
 
     public void FreezeBubble()
