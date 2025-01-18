@@ -37,15 +37,4 @@ public class SFXManager : MonoBehaviour
         int rng = Random.Range(7, 11);
         Player.PlayOneShot(SFX[rng], 1f);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            PlayHappySound();
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            PlayDisappointedSound();
-        }
-    }
 }
