@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: -5418686934181089461}
   m_Layer: 9
   m_Name: Customer
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,6 +145,8 @@ MonoBehaviour:
   - {fileID: 5403594949093021997}
   - {fileID: 2806289311112754335}
   - {fileID: 6185030799977097803}
+  hitCollider: {fileID: -5418686934181089461}
+  animator: {fileID: 2848434426969635878}
 --- !u!70 &-5418686934181089461
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
