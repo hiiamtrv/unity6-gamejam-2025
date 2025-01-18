@@ -37,7 +37,7 @@ public class Customer : MonoBehaviour
     private void OnEnable()
     {
         // _wishColorIndex = RandomFavouriteColorIndex();
-        animator.Play(FunWalk);
+        animator.Play(SadAppear);
     }
 
     private int RandomFavouriteColorIndex()
@@ -66,6 +66,7 @@ public class Customer : MonoBehaviour
         emo.gameObject.SetActive(true);
         emo.ShowHappyEmo();
         animator.Play(Cheer);
+        animator.Play(FunWalk);
 
         LevelManager.CustomerServed?.Invoke(1);
     }
