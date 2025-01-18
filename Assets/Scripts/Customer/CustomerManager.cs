@@ -60,7 +60,7 @@ public class CustomerManager : MonoBehaviour
 
 
                 // Move to the target position
-                customerSpawned.transform.DOMove(customerPosList[i].pos.position, 2f)
+                customerSpawned.transform.DOMove(customerPosList[i].pos.position, 4f)
                     .SetEase(Ease.OutCirc)
                     .OnComplete(() =>
                     {
