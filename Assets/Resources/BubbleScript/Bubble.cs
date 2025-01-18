@@ -4,12 +4,17 @@ public class Bubble : MonoBehaviour
 {
     [SerializeField] private float upSpeed = 5f;
     [SerializeField] private float horizontalSpeed = 2f;
+    [SerializeField] private float timeToDestroy = 15f;
     [SerializeField] private float horizontalOffset = 2f;
     public int Level = 1;
 
     // 16 colors
     private int colorIndex;
+
+    public int GetColorIndex() => colorIndex;
+
     private float beginTime;
+
 
     private void Start()
     {
@@ -30,7 +35,7 @@ public class Bubble : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time - beginTime > 10f)         
+        if(Time.time - beginTime > timeToDestroy)         
         {
             Destroy(gameObject);
         }
@@ -49,6 +54,7 @@ public class Bubble : MonoBehaviour
         else if(collision.gameObject.CompareTag("Customer"))
         {
             Debug.Log("Bubble hit customer");
+            Destroy(gameObject);
         }
     }
 
