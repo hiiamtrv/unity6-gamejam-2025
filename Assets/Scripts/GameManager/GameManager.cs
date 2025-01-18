@@ -4,14 +4,25 @@ namespace GameManager
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private float initialTime;
-        [SerializeField] private float initialReputation;
+        public static GameManager Instance { get; private set; }
 
-        private float timer;
-        private float reputation;
+        public int initialReputation;
+        public int maxReputation;
+        public int reputation;
 
-        private static bool isPlaying;
-        public static bool IsPlaying => isPlaying;
+        public static bool isPlaying;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         private void Start()
         {
@@ -20,7 +31,6 @@ namespace GameManager
 
         public void Reset()
         {
-            timer = initialTime;
             reputation = initialReputation;
             isPlaying = true;
         }
@@ -33,27 +43,16 @@ namespace GameManager
                 {
                     Debug.Log("Game Over: No reputation");
                     isPlaying = false;
-                    return;
-                }
-
-                timer -= Time.deltaTime;
-                if (timer <= 0)
-                {
-                    Debug.Log("Game Over: Timeout");
-                    isPlaying = false;
+                    UIManager.Instance.ShowGameOverPanel();
                     return;
                 }
             }
         }
 
-        public void AddTime(float time)
-        {
-            timer += time;
-        }
-
-        public void AddReputation(float reputation)
+        public void AddReputation(int reputation)
         {
             this.reputation += reputation;
+            UIManager.Instance.UpdateReputationScores(reputation);
         }
     }
 }

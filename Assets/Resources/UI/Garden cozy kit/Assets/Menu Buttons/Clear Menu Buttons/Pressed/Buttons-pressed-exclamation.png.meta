@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Buttons-pressed-exclamation_0: -507912037345271126
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

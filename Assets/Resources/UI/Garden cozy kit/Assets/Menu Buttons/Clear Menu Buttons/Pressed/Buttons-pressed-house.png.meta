@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Buttons-pressed-house_0: 6374406202849632905
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

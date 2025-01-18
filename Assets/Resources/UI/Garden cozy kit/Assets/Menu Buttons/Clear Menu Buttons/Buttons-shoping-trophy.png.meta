@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Buttons-shoping-trophy_0: 4158739710212262060
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

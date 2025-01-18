@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Buttons-megaphone_0: 8121941080373403489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

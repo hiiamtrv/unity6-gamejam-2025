@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Buttons-pressed-cell-phone_0: -6100243215558379704
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
