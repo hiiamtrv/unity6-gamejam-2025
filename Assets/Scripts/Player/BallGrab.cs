@@ -18,6 +18,8 @@ public class BallGrab : MonoBehaviour
     [SerializeField] private Vector2 bubbleColliderOffset;
     [SerializeField] private float bubbleCollidePushForce;
     private Collider2D collidedBubbleCollider;
+    
+    KeyCode grabKey = KeyCode.Space;
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class BallGrab : MonoBehaviour
         {
             detectedBallCollider = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(ballDetectOffset.x * transform.localScale.x, ballDetectOffset.y), ballDetectRadius, bubbleLayer);
             collidedBubbleCollider = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(bubbleColliderOffset.x * transform.localScale.x, bubbleColliderOffset.y), bubbleColliderRadius, bubbleLayer);
-            if (detectedBallCollider && Input.GetKeyDown(KeyCode.C))
+            if (detectedBallCollider && (Input.GetKeyDown(grabKey) || Input.GetMouseButtonDown(0)))
             {
                 isGrabbingBall = true;
                 anim.Play("Grab");
@@ -53,7 +55,7 @@ public class BallGrab : MonoBehaviour
                 return;
             }
 
-            if (Input.GetKeyUp(KeyCode.C))
+            if (Input.GetKeyUp(grabKey) || Input.GetMouseButtonUp(0))
             {
                 isGrabbingBall = false;
                 detectedBallCollider.attachedRigidbody.AddForce(rb.linearVelocity.normalized * forceOnBallRelease, ForceMode2D.Impulse);
