@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6735384662921243949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792126774355060763}
+  - component: {fileID: 8872528020864530165}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1792126774355060763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735384662921243949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 393.86935, y: 228.16231, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8872528020864530165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735384662921243949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62fbd5f26546ff446b67d3a9b8599c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuPrefab: {fileID: 403651153639160653, guid: ef84db82a69442145ac5de32dfc5df90, type: 3}
+  gameOverPanelPrefab: {fileID: 2729308648719206998, guid: d5d4f2cf632131241a7ffe22071e4558, type: 3}
+  loadingPanelPrefab: {fileID: 8087280514302906902, guid: a15a6c08096e46646874ce0ccb82332d, type: 3}
+  reputationPanel: {fileID: 3695271487400380739, guid: 5bd41d5378af58a4cb3023eac5cfd91c, type: 3}
+  canvas: {fileID: 0}
+  gameName: {fileID: 0}
+  loadingBar: {fileID: 8776517589521195945, guid: e01a9ace33a4a64498d238860d1848cb, type: 3}
+  gameOverText: {fileID: 91281745847429306, guid: e801961a701fd9b4ebe5dfaebfbb6756, type: 3}
+  pausingText: {fileID: 3000801997443057532, guid: 7e792b93ef032b044a6f312cfd87e1b2, type: 3}
+  btnPlay: {fileID: 0}
+  btnResume: {fileID: 3287918343300194563, guid: a93708fc78e4b754e9ac57b5df50e0ac, type: 3}
+  btnPlayAgain: {fileID: 6629083960945165906, guid: 85722425790feec41840c51fc44045ed, type: 3}
+  btnBackToMainMenu: {fileID: 7667960706414336551, guid: 09a7f73741c65b540bc5a6347880efa8, type: 3}
+  starPrefab: {fileID: 2886475356425883146, guid: a922df28e21dd074fa6a6d17c48f9873, type: 3}

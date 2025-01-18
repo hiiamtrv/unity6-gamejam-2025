@@ -26,5 +26,8 @@ public class PlayerController : MonoBehaviour
         // Flip Sprite
         if (moveInput.x != 0)
             transform.localScale = new Vector3(Mathf.Sign(moveInput.x) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            UIManager.Instance.PauseGame();
     }
 }
