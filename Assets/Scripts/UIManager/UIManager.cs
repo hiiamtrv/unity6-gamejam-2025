@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     private Canvas canvas;
 
 
-   [SerializeField] private TMP_Text gameName;
+    [SerializeField] private TMP_Text gameName;
     [SerializeField] private Slider loadingBar;
     [SerializeField] private TMP_Text gameOverText;
     [SerializeField] private TMP_Text pausingText;
@@ -74,18 +74,25 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+    }
+
+    void InitMainMenu()
+    {
+
         initialReputation = GameManager.GameManager.Instance.initialReputation;
         maxReputation = GameManager.GameManager.Instance.maxReputation;
-
 
         if (btnPlay != null)
         {
             btnPlay.transform.localScale = Vector3.zero;
             btnPlay.transform.DOScale(1.0f, 3.0f).SetEase(Ease.OutBack);
         }
-
-        gameName.transform.localScale = Vector3.zero;
-        gameName.transform.DOScale(1.0f, 2.0f).SetEase(Ease.OutBack).SetLoops(-1, LoopType.Yoyo);
+        if (gameName != null)
+        {
+            gameName.transform.localScale = Vector3.zero;
+            gameName.transform.DOScale(1.0f, 2.0f).SetEase(Ease.OutBack).SetLoops(-1, LoopType.Yoyo);
+        }
     }
 
     // Update is called once per frame
@@ -101,13 +108,32 @@ public class UIManager : MonoBehaviour
     {
         if (pauseMenuInstance == null)
         {
+            canvas = FindAnyObjectByType<Canvas>();
             pauseMenuInstance = Instantiate(pauseMenuPrefab);
-            CenterThePanel(pauseMenuInstance);
-        }
-        TogglePauseMenu();
-        Time.timeScale = pauseMenuInstance.activeSelf ? 0 : 1; // Pause/Resume game time
+            pauseMenuInstance.transform.SetParent(canvas.transform, false);
 
-        GameManager.GameManager.isPlaying = pauseMenuInstance.activeSelf ? false : true;
+            // Get the RectTransform component
+            RectTransform rectTransform = pauseMenuInstance.GetComponent<RectTransform>();
+
+            // Reset position and rotation
+            rectTransform.localPosition = Vector3.zero;
+            rectTransform.localRotation = Quaternion.identity;
+
+            // Set anchor points to fill the entire screen
+            rectTransform.anchorMin = Vector2.zero;    // (0,0) - bottom left
+            rectTransform.anchorMax = Vector2.one;     // (1,1) - top right
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+
+            // Make it fill the anchored area completely
+            rectTransform.offsetMin = Vector2.zero;    // No offset from bottom-left
+            rectTransform.offsetMax = Vector2.zero;    // No offset from top-right
+
+            pauseMenuInstance.SetActive(false);
+        }
+
+        TogglePauseMenu();
+        Time.timeScale = pauseMenuInstance.activeSelf ? 0 : 1;
+        GameManager.GameManager.isPlaying = !pauseMenuInstance.activeSelf;
     }
 
 
@@ -177,9 +203,15 @@ public class UIManager : MonoBehaviour
         return corners[1];
     }
 
+    void GetSpawnPauseMenuPosition(RectTransform rectTransform)
+    {
+        rectTransform.anchoredPosition = new Vector2(0, 0);
+        Debug.Log(rectTransform.anchoredPosition);
+    }
+
     public void UpdateReputationScores(int score)
     {
-        if(GameManager.GameManager.Instance.reputation > 0)
+        if (GameManager.GameManager.Instance.reputation > 0)
         {
             if (invisibleReputationScores.Count > 0 && score > 0 && GameManager.GameManager.Instance.reputation < maxReputation)
             {
@@ -204,7 +236,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverPanel()
     {
-        if(gameOverPanelInstance == null)
+        if (gameOverPanelInstance == null)
         {
             gameOverPanelInstance = Instantiate(gameOverPanelPrefab);
             CenterThePanel(gameOverPanelInstance);
@@ -268,6 +300,7 @@ public class UIManager : MonoBehaviour
 
             yield return null;
         }
+        canvas = FindAnyObjectByType<Canvas>();
     }
 
     public void PlayAgain()
@@ -284,7 +317,10 @@ public class UIManager : MonoBehaviour
         }
         else if (sceneName == "MainMenuScene")
         {
-            
+            Time.timeScale = 1;
+            gameName = GameObject.Find("Game Name").GetComponent<TMP_Text>();
+            btnPlay = GameObject.Find("Play Button").GetComponent<UnityEngine.UI.Button>();
+            InitMainMenu();
         }
     }
 
