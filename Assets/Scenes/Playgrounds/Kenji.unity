@@ -447,40 +447,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54f0c76834f4fd24e8f6b5505e113559, type: 3}
---- !u!1 &242191129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5056703326280195030, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-  m_PrefabInstance: {fileID: 605864462}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &242191130 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1068372165770663503, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-  m_PrefabInstance: {fileID: 605864462}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &242191131 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1383420021658514869, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-  m_PrefabInstance: {fileID: 605864462}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &242191133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242191129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5578797240fb24e4e8e3f92eb6daace5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BGM: {fileID: 242191131}
-  UnderWaterSound: {fileID: 242191130}
-  BGMClip: {fileID: 8300000, guid: 8bfe60d09a1148940a02ce284460120e, type: 3}
-  UnderWaterClip: {fileID: 8300000, guid: bc54b27800b9ddd40ad7f60b53a1d54f, type: 3}
-  BGMvolume: 0.4
-  UWSVolume: 0.3
-  isPlaying: 0
 --- !u!1 &253633586
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,22 +888,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1068372165770663503, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1068372165770663503, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383420021658514869, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383420021658514869, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1689400276380216442, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -982,13 +932,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGM
       objectReference: {fileID: 0}
+    - target: {fileID: 5490911547155623261, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
+      propertyPath: BGMClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8bfe60d09a1148940a02ce284460120e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5056703326280195030, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 242191133}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea0e23d929163d04f9e64c2e12857e3f, type: 3}
 --- !u!1 &652006761 stripped
 GameObject:
