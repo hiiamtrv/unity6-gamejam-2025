@@ -48,12 +48,12 @@ public class Customer : MonoBehaviour
         //Show angry face
         Debug.Log("I dont like this");
         //Deduce reputation
-        GameManager gameManager = FindObjectsByType<GameManager>(FindObjectsSortMode.None);
-        if (gameManager != null)
-        {
-            gameManager.AddReputation(10); // Add 10 to reputation
-            Debug.Log("Added 10 reputation.");
-        }
+       // GameManager gameManager = FindObjectsByType<GameManager>(FindObjectsSortMode.None);
+       // if (gameManager != null)
+       // {
+       //     gameManager.AddReputation(10); // Add 10 to reputation
+       //     Debug.Log("Added 10 reputation.");
+        //}
     }
     private void ShowingWishColor()
     {
