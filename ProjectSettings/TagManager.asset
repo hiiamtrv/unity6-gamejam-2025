@@ -17,7 +17,7 @@ TagManager:
   - Player
   - Spike
   - Customer
-  - 
+  - Magnet
   - 
   - 
   - 
@@ -48,6 +48,9 @@ TagManager:
     locked: 0
   - name: Above water
     uniqueID: 3998378321
+    locked: 0
+  - name: Above above water
+    uniqueID: 1906453809
     locked: 0
   m_RenderingLayers:
   - Default

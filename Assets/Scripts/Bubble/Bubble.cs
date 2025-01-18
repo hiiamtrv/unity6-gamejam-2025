@@ -17,6 +17,7 @@ public class Bubble : MonoBehaviour
     private int colorIndex;
 
     public int GetColorIndex() => colorIndex;
+
     public void SetColorIndex(int index)
     {
         colorIndex = index;
@@ -27,9 +28,9 @@ public class Bubble : MonoBehaviour
 
     private void Awake()
     {
-        colorIndex = Random.Range(0, colorCount); 
+        // colorIndex = Random.Range(0, colorCount); 
         bubbleSprite = GetComponent<SpriteRenderer>();
-        bubbleSprite.color = colorSet.colors[colorIndex];
+        // bubbleSprite.color = colorSet.colors[colorIndex];
     }
 
     private void Start()
@@ -40,6 +41,7 @@ public class Bubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         beginTime = Time.time;
         gameObject.transform.localScale = new Vector3(Level, Level, 1);
         float offset = Random.Range(-0.5f, 0.5f);
@@ -56,21 +58,25 @@ public class Bubble : MonoBehaviour
         {
             Pop();
         }
+
         //float lên từ từ và di chuyển ngang
         transform.position += Vector3.up * upSpeed * Time.deltaTime;
-        transform.position += Vector3.right * Mathf.Cos(Time.time * horizontalSpeed) * horizontalOffset * Time.deltaTime;
+        transform.position +=
+            Vector3.right * Mathf.Cos(Time.time * horizontalSpeed) * horizontalOffset * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bubble") && this.GetInstanceID() < collision.gameObject.GetInstanceID())
+        Debug.Log(collision.gameObject.name + " " + collision.gameObject.tag + " collided with " + gameObject.tag);
+
+        if (collision.gameObject.CompareTag("Bubble") && GetInstanceID() < collision.gameObject.GetInstanceID())
         {
             BubbleManager.Instance.MergeBubble(gameObject, collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("Customer"))
+        else if (collision.isTrigger && !collision.usedByEffector && collision.gameObject.CompareTag("Customer"))
         {
-            Debug.Log("Bubble hit customer");
-            collision.SendMessage("SubmitColor", colorIndex, SendMessageOptions.DontRequireReceiver);
+            Debug.Log($"Bubble hit customer {collision.gameObject.name} {colorIndex}");
+            collision.gameObject.SendMessage("SubmitColor", colorIndex, SendMessageOptions.DontRequireReceiver);
             Pop();
         }
     }
@@ -104,5 +110,3 @@ public class Bubble : MonoBehaviour
         BubbleManager.Instance.RemoveBubble(gameObject);
     }
 }
-
-

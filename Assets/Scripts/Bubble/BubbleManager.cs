@@ -4,7 +4,9 @@ using UnityEngine;
 public class BubbleManager : MonoBehaviour
 {
     // singleton pattern
+
     #region singleton
+
     private static BubbleManager _instance;
     public static BubbleManager Instance => _instance;
 
@@ -19,20 +21,20 @@ public class BubbleManager : MonoBehaviour
             Destroy(this);
         }
     }
+
     #endregion
 
     [SerializeField] private float timeToSpawn = 4f;
     [SerializeField] private float freezeTime = 5f;
     [SerializeField] private GameObject bubble;
-    [SerializeField] private GameObject pointA;
-    [SerializeField] private GameObject pointB;
-    [SerializeField] private const int bubbleCount = 6;
+    [SerializeField] private List<GameObject> spawners;
     [SerializeField] private List<int> listPosition = new List<int>();
     [SerializeField] private List<GameObject> list = new List<GameObject>();
     private float timer = 0;
+
     void Start()
     {
-        for (int i = 0; i < bubbleCount; i++)
+        for (int i = 0; i < spawners.Count; i++)
         {
             listPosition.Add(i);
         }
@@ -41,12 +43,12 @@ public class BubbleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= timeToSpawn)
-        {
-            SpawnRandomBubble();
-            timer = 0;
-        }
+        // timer += Time.deltaTime;
+        // if (timer >= timeToSpawn)
+        // {
+        //     SpawnRandomBubble();
+        //     timer = 0;
+        // }
     }
 
     void ListShuffle()
@@ -60,14 +62,25 @@ public class BubbleManager : MonoBehaviour
         }
     }
 
-    void SpawnRandomBubble()
+    public void SpawnRandomBubble(int amount = -1, int[] colorPool = null)
     {
-        int randomAmountBubble = Random.Range(0, bubbleCount);
+        if (amount < 0)
+        {
+            amount = Random.Range(0, spawners.Count);
+        }
+
         ListShuffle();
-        for (int i = 0; i < randomAmountBubble; i++)
+        for (int i = 0; i < amount; i++)
         {
             GameObject newBubble = Instantiate(bubble);
-            newBubble.transform.position = new Vector2((pointB.transform.position.x - pointA.transform.position.x) / bubbleCount * listPosition[i] + pointA.transform.position.x, pointA.transform.position.y);
+            newBubble.transform.position = new Vector2(spawners[listPosition[i]].transform.position.x,
+                spawners[listPosition[i]].transform.position.y);
+
+            if (colorPool != null)
+            {
+                var randIdx = Random.Range(0, colorPool.Length);
+                newBubble.SendMessage("SetColorIndex", colorPool[randIdx], SendMessageOptions.DontRequireReceiver);
+            }
         }
     }
 
@@ -75,6 +88,7 @@ public class BubbleManager : MonoBehaviour
     {
         list.Add(bubble);
     }
+
     public void RemoveBubble(GameObject bubble)
     {
         list.Remove(bubble);
@@ -94,17 +108,19 @@ public class BubbleManager : MonoBehaviour
 
         int bubble1ColorIndex = bubble1Component.GetColorIndex();
         int bubble2ColorIndex = bubble2Component.GetColorIndex();
-        if(bubble2ColorIndex < bubble1ColorIndex) 
+        if (bubble2ColorIndex < bubble1ColorIndex)
         {
             int temp = bubble1ColorIndex;
             bubble1ColorIndex = bubble2ColorIndex;
             bubble2ColorIndex = temp;
         }
-        if(bubble2ColorIndex - bubble1ColorIndex > 6)
+
+        if (bubble2ColorIndex - bubble1ColorIndex > 6)
         {
             bubble1ColorIndex += 12;
         }
-        newComponent.SetColorIndex(((bubble1ColorIndex + bubble2ColorIndex)/2) % 12);
+
+        newComponent.SetColorIndex(((bubble1ColorIndex + bubble2ColorIndex) / 2) % 12);
         bubble1Component.Pop();
         bubble2Component.Pop();
     }
@@ -117,8 +133,3 @@ public class BubbleManager : MonoBehaviour
         }
     }
 }
-
-
-
-
-

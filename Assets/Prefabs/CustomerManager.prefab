@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 265995695207445946}
-  - component: {fileID: 5712142194757488943}
+  - component: {fileID: 181125439966044121}
   m_Layer: 0
   m_Name: CustomerManager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5712142194757488943
+--- !u!114 &181125439966044121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,12 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662e5ead8fd30404caec58c5dd0cf721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerPrefab: {fileID: 4345611527740177967, guid: f3059c21847d9c14a97bc869343adb72, type: 3}
-  SpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  destroyCustomerTime: 2
-  waitForDestructionTime: 3
+  customerPosList: []
+  intialPos: {fileID: 0}
+  customerPrefab: {fileID: 2319669575245890093, guid: f3059c21847d9c14a97bc869343adb72, type: 3}
