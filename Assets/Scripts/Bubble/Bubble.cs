@@ -17,6 +17,7 @@ public class Bubble : MonoBehaviour
     private int colorIndex;
 
     public int GetColorIndex() => colorIndex;
+
     public void SetColorIndex(int index)
     {
         colorIndex = index;
@@ -27,9 +28,9 @@ public class Bubble : MonoBehaviour
 
     private void Awake()
     {
-        colorIndex = Random.Range(0, colorCount); 
+        // colorIndex = Random.Range(0, colorCount); 
         bubbleSprite = GetComponent<SpriteRenderer>();
-        bubbleSprite.color = colorSet.colors[colorIndex];
+        // bubbleSprite.color = colorSet.colors[colorIndex];
     }
 
     private void Start()
@@ -40,6 +41,7 @@ public class Bubble : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         beginTime = Time.time;
         gameObject.transform.localScale = new Vector3(Level, Level, 1);
         float offset = Random.Range(-0.5f, 0.5f);
@@ -56,9 +58,11 @@ public class Bubble : MonoBehaviour
         {
             Pop();
         }
+
         //float lên từ từ và di chuyển ngang
         transform.position += Vector3.up * upSpeed * Time.deltaTime;
-        transform.position += Vector3.right * Mathf.Cos(Time.time * horizontalSpeed) * horizontalOffset * Time.deltaTime;
+        transform.position +=
+            Vector3.right * Mathf.Cos(Time.time * horizontalSpeed) * horizontalOffset * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -104,5 +108,3 @@ public class Bubble : MonoBehaviour
         BubbleManager.Instance.RemoveBubble(gameObject);
     }
 }
-
-

@@ -4,7 +4,6 @@ namespace GameManager
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private float initialTime;
         [SerializeField] private float initialReputation;
 
         private float timer;
@@ -20,7 +19,6 @@ namespace GameManager
 
         public void Reset()
         {
-            timer = initialTime;
             reputation = initialReputation;
             isPlaying = true;
         }
@@ -35,20 +33,7 @@ namespace GameManager
                     isPlaying = false;
                     return;
                 }
-
-                timer -= Time.deltaTime;
-                if (timer <= 0)
-                {
-                    Debug.Log("Game Over: Timeout");
-                    isPlaying = false;
-                    return;
-                }
             }
-        }
-
-        public void AddTime(float time)
-        {
-            timer += time;
         }
 
         public void AddReputation(float reputation)
