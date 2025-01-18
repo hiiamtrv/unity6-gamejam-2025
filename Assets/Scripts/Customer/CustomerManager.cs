@@ -65,6 +65,7 @@ public class CustomerManager : MonoBehaviour
                     .OnComplete(() =>
                     {
                         customerSpawned.SendMessage("ShowingWishColor", SendMessageOptions.DontRequireReceiver);
+                        customerSpawned.GetComponentInChildren<Animator>().Play("Idle");
                     });
 
 
