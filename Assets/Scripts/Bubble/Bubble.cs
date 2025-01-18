@@ -27,7 +27,7 @@ public class Bubble : MonoBehaviour
 
     private void Awake()
     {
-        colorIndex = Random.Range(0, colorCount);
+        colorIndex = Random.Range(0, colorCount); 
         bubbleSprite = GetComponent<SpriteRenderer>();
         bubbleSprite.color = colorSet.colors[colorIndex];
     }
@@ -41,7 +41,6 @@ public class Bubble : MonoBehaviour
             Destroy(gameObject);
         }
         beginTime = Time.time;
-        colorIndex = Random.Range(0, 16);
         gameObject.transform.localScale = new Vector3(Level, Level, 1);
         float offset = Random.Range(-0.5f, 0.5f);
         upSpeed *= Level;
@@ -66,7 +65,6 @@ public class Bubble : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bubble") && this.GetInstanceID() < collision.gameObject.GetInstanceID())
         {
-            Debug.Log("Bubble hit Bubble");
             BubbleManager.Instance.MergeBubble(gameObject, collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("Customer"))

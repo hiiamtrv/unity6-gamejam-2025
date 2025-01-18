@@ -91,7 +91,9 @@ public class BubbleManager : MonoBehaviour
         Bubble newComponent = newBubble.GetComponent<Bubble>();
         newComponent.Level = newLevel;
         newBubble.transform.position = (bubble1.transform.position + bubble2.transform.position) / 2;
-        newComponent.SetColorIndex(((bubble1Component.GetColorIndex()+bubble2Component.GetColorIndex())/2 + 12) % 12);
+        int bubble1ColorIndex = bubble1Component.GetColorIndex();
+        int bubble2ColorIndex = bubble2Component.GetColorIndex();
+        newComponent.SetColorIndex(((bubble1ColorIndex + bubble2ColorIndex)/2) % 12);
         bubble1Component.Pop();
         bubble2Component.Pop();
     }
