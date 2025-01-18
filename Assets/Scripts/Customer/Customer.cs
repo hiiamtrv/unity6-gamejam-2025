@@ -13,8 +13,8 @@ public class Customer : MonoBehaviour
 
     private void Awake()
     {
-        _minWaiting = 3f;
-        _maxWaiting = 6f;
+        _minWaiting = 90f;
+        _maxWaiting = 100f;
         _countdownTime = Random.Range(_minWaiting, _maxWaiting);
     }
     private void OnEnable()
@@ -74,24 +74,18 @@ public class Customer : MonoBehaviour
         Destroy(gameObject, 1f);
 
     }
-    private void OnCollisionEnter2D(Collision2D coli2D)
+    public void SubmitColor(int colorIndex)
     {
-        if (coli2D.collider.CompareTag("Bubble"))
+        if (colorIndex == _wishColorIndex)
         {
-            int bubbleColor = 4;
-            //bubbleColor = coli2D.collider.TryGetComponent<Bubble>().GetColorIndex();
-            //check mau == _wishColorIndex thi huy customer
-            if (bubbleColor == _wishColorIndex)
-            {
-                Satisfied();
-                Leave();
-            }
-            else //check mau != _wishColorIndex thi goi GameManager - mau va huy customer
-            {
-                Angry();
-            }
-            
+            Satisfied();
+            Leave();
+        } else
+        {
+            Angry();
+            Leave();
         }
 
     }
+
 }

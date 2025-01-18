@@ -70,6 +70,7 @@ public class Bubble : MonoBehaviour
         else if (collision.gameObject.CompareTag("Customer"))
         {
             Debug.Log("Bubble hit customer");
+            collision.SendMessage("SubmitColor", colorIndex, SendMessageOptions.DontRequireReceiver);
             Pop();
         }
     }
