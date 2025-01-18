@@ -34,7 +34,8 @@ namespace Level
         private bool isSpawningBubble;
         private bool isSpawningCustomer;
 
-        private readonly int[] defaultColorPool = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        private readonly int[] mixReqColorPool = { 0, 2, 4, 6, 8, 10 };
+        private readonly int[] defaultColorPool = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 
         private void Awake()
         {
@@ -108,7 +109,7 @@ namespace Level
         {
             if (!isSpawningBubble)
             {
-                SpawnBubble(delaySpawnBubbleUnlimited, defaultColorPool);
+                SpawnBubble(delaySpawnBubbleUnlimited, mixReqColorPool);
             }
 
             if (!isSpawningCustomer)

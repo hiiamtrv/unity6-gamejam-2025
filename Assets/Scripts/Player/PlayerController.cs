@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
             IsUsingMouse = false;
         }
 
-        if (!IsUsingMouse && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))
+        if (!IsUsingMouse && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0 || Input.GetMouseButton(0)))
         {
             IsUsingMouse = true;
         }
