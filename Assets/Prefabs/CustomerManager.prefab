@@ -41,23 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6964933562190240322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0571fc66589d6b468d3bbe550089878, type: 3}
+  m_Script: {fileID: 11500000, guid: 662e5ead8fd30404caec58c5dd0cf721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerPosList:
-  - pos: {fileID: 0}
-    isTaking: 0
-  - pos: {fileID: 0}
-    isTaking: 0
-  - pos: {fileID: 0}
-    isTaking: 0
-  - pos: {fileID: 0}
-    isTaking: 0
-  - pos: {fileID: 0}
-    isTaking: 0
-  - pos: {fileID: 0}
-    isTaking: 0
-  - pos: {fileID: 0}
-    isTaking: 0
+  customerPosList: []
   intialPos: {fileID: 0}
   customerPrefab: {fileID: 2319669575245890093, guid: f3059c21847d9c14a97bc869343adb72, type: 3}

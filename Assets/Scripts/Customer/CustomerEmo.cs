@@ -21,7 +21,6 @@ public class CustomerEmo : MonoBehaviour
 
     public void ShowColorEmo(Color color)
     {
-        gameObject.SetActive(true);
         spriteRenderer.sprite = colorEmo;
 
         colorWishEmo.gameObject.SetActive(true);
@@ -30,7 +29,6 @@ public class CustomerEmo : MonoBehaviour
 
     public void ShowHappyEmo()
     {
-        gameObject.SetActive(true);
         var randIdx = Random.Range(0, happyEmo.Length);
         spriteRenderer.sprite = happyEmo[randIdx];
 
@@ -39,7 +37,6 @@ public class CustomerEmo : MonoBehaviour
 
     public void ShowSadEmo()
     {
-        gameObject.SetActive(true);
         var randIdx = Random.Range(0, sadEmo.Length);
         spriteRenderer.sprite = sadEmo[randIdx];
 

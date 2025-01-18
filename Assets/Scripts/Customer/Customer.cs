@@ -53,6 +53,7 @@ public class Customer : MonoBehaviour
     {
         //Show satisfaction
         Debug.Log("I like this");
+        emo.gameObject.SetActive(true);
         emo.ShowHappyEmo();
 
         LevelManager.CustomerServed?.Invoke(1);
@@ -69,13 +70,16 @@ public class Customer : MonoBehaviour
         //     gameManager.AddReputation(10); // Add 10 to reputation
         //     Debug.Log("Added 10 reputation.");
         //}
+        emo.gameObject.SetActive(true);
         emo.ShowSadEmo();
     }
 
     public void ShowingWishColor()
     {
         //Change ColorIndex to real color
-        Debug.Log("My favourite color is" + _wishColorIndex.ToString());
+        // Debug.Log("My favourite color is" + _wishColorIndex.ToString());
+
+        emo.gameObject.SetActive(true);
         emo.ShowColorEmo(colorConfig.colors[_wishColorIndex]);
         //Delay;
     }

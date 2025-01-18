@@ -67,14 +67,16 @@ public class Bubble : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bubble") && this.GetInstanceID() < collision.gameObject.GetInstanceID())
+        Debug.Log(collision.gameObject.name + " " + collision.gameObject.tag + " collided with " + gameObject.tag);
+
+        if (collision.gameObject.CompareTag("Bubble") && GetInstanceID() < collision.gameObject.GetInstanceID())
         {
             BubbleManager.Instance.MergeBubble(gameObject, collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("Customer"))
+        else if (collision.isTrigger && !collision.usedByEffector && collision.gameObject.CompareTag("Customer"))
         {
-            Debug.Log("Bubble hit customer");
-            collision.SendMessage("SubmitColor", colorIndex, SendMessageOptions.DontRequireReceiver);
+            Debug.Log($"Bubble hit customer {collision.gameObject.name} {colorIndex}");
+            collision.gameObject.SendMessage("SubmitColor", colorIndex, SendMessageOptions.DontRequireReceiver);
             Pop();
         }
     }

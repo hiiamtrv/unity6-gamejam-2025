@@ -27,16 +27,14 @@ public class BubbleManager : MonoBehaviour
     [SerializeField] private float timeToSpawn = 4f;
     [SerializeField] private float freezeTime = 5f;
     [SerializeField] private GameObject bubble;
-    [SerializeField] private GameObject pointA;
-    [SerializeField] private GameObject pointB;
-    [SerializeField] private const int bubbleCount = 6;
+    [SerializeField] private List<GameObject> spawners;
     [SerializeField] private List<int> listPosition = new List<int>();
     [SerializeField] private List<GameObject> list = new List<GameObject>();
     private float timer = 0;
 
     void Start()
     {
-        for (int i = 0; i < bubbleCount; i++)
+        for (int i = 0; i < spawners.Count; i++)
         {
             listPosition.Add(i);
         }
@@ -64,21 +62,19 @@ public class BubbleManager : MonoBehaviour
         }
     }
 
-    public void SpawnRandomBubble(int randomAmountBubble = -1, int[] colorPool = null)
+    public void SpawnRandomBubble(int amount = -1, int[] colorPool = null)
     {
-        if (randomAmountBubble < 0)
+        if (amount < 0)
         {
-            randomAmountBubble = Random.Range(0, bubbleCount);
+            amount = Random.Range(0, spawners.Count);
         }
 
         ListShuffle();
-        for (int i = 0; i < randomAmountBubble; i++)
+        for (int i = 0; i < amount; i++)
         {
             GameObject newBubble = Instantiate(bubble);
-            newBubble.transform.position =
-                new Vector2(
-                    (pointB.transform.position.x - pointA.transform.position.x) / bubbleCount * listPosition[i] +
-                    pointA.transform.position.x, pointA.transform.position.y);
+            newBubble.transform.position = new Vector2(spawners[listPosition[i]].transform.position.x,
+                spawners[listPosition[i]].transform.position.y);
 
             if (colorPool != null)
             {

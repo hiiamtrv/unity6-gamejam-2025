@@ -58,22 +58,13 @@ public class CustomerManager : MonoBehaviour
                 customerSpawned.SendMessage("CustomerConfigure", requestColorIdxs[randIdx],
                     SendMessageOptions.DontRequireReceiver);
 
-                // Create a sequence for movement and swaying
-                Sequence sequence = DOTween.Sequence();
 
                 // Move to the target position
                 customerSpawned.transform.DOMove(customerPosList[i].pos.position, 2f)
-                    .SetEase(Ease.Linear)
+                    .SetEase(Ease.OutCirc)
                     .OnComplete(() =>
                     {
-                        customerSpawned.transform.DORotate(new Vector3(0, 0, 15), 0.25f) // Rotate to 15 degrees
-                            .SetLoops(-1, LoopType.Yoyo) // Sway back and forth
-                            .SetEase(Ease.InOutSine)
-                            .OnStart(() =>
-                            {
-                                Debug.Log("OKKKK");
-                                customerSpawned.SendMessage("ShowingWishColor", SendMessageOptions.DontRequireReceiver);
-                            });
+                        customerSpawned.SendMessage("ShowingWishColor", SendMessageOptions.DontRequireReceiver);
                     });
 
 
