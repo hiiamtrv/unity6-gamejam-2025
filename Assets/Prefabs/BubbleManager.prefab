@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8068808710479142134}
   - component: {fileID: 3632490318208412736}
   m_Layer: 0
-  m_Name: Bubble Manager
+  m_Name: BubbleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
