@@ -10,37 +10,29 @@ namespace Bundos.WaterSystem
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class Water : MonoBehaviour
     {
-        [Header("Dynamic Wave Settings")]
-        public bool interactive = true;
+        [Header("Dynamic Wave Settings")] public bool interactive = true;
         public float splashInfluence = 0.005f;
         public float waveHeight = .25f;
 
-        [Header("Constant Waves Settings")]
-        public bool hasConstantWaves = true;
+        [Header("Constant Waves Settings")] public bool hasConstantWaves = true;
         public float waveAmplitude = 1f;
         public float waveSpeed = 1f;
         public int waveStep = 1;
 
-        [Header("Spring Settings")]
-        public int numSprings = 10;
+        [Header("Spring Settings")] public int numSprings = 10;
         public float spacing = 1f;
         public float springConstant = 0.05f;
         public float springDamping = 0.025f;
 
-        [Header("Particles")]
-        public GameObject splashParticle;
+        [Header("Particles")] public GameObject splashParticle;
 
-        [HideInInspector]
-        Spring[] springs;
+        [HideInInspector] Spring[] springs;
         MeshFilter meshFilter;
         Mesh mesh;
 
-        [HideInInspector]
-        public Vector2[] vertices, baseVertecies;
-        [HideInInspector]
-        public int[] triangles;
-        [HideInInspector]
-        Vector2[] uvs;
+        [HideInInspector] public Vector2[] vertices, baseVertecies;
+        [HideInInspector] public int[] triangles;
+        [HideInInspector] Vector2[] uvs;
 
 
         private void Start()
@@ -130,6 +122,7 @@ namespace Bundos.WaterSystem
             {
                 vector3Array[i] = new Vector3(vector2Array[i].x, vector2Array[i].y, 0);
             }
+
             return vector3Array;
         }
 
@@ -153,7 +146,8 @@ namespace Bundos.WaterSystem
             // Random spring movement
             for (int i = 0; i < springs.Length; i++)
             {
-                springs[i].acceleration = (-springConstant * springs[i].weightPosition.y) * Vector2.up - (springs[i].velocity * springDamping);
+                springs[i].acceleration = (-springConstant * springs[i].weightPosition.y) * Vector2.up -
+                                          (springs[i].velocity * springDamping);
 
                 if (i > 0)
                 {
@@ -170,7 +164,8 @@ namespace Bundos.WaterSystem
                 springs[i].velocity += springs[i].acceleration;
 
                 if (hasConstantWaves)
-                    springs[i].sineOffset = new Vector2(0, waveAmplitude * Mathf.Sin((Time.realtimeSinceStartup * waveSpeed) + i * waveStep));
+                    springs[i].sineOffset = new Vector2(0,
+                        waveAmplitude * Mathf.Sin((Time.realtimeSinceStartup * waveSpeed) + i * waveStep));
 
                 springs[i].weightPosition += springs[i].velocity;
             }
@@ -187,7 +182,7 @@ namespace Bundos.WaterSystem
             mesh.RecalculateNormals();
         }
 
-        private void Ripple(Vector3 contactPoint, bool sink)
+        private void Ripple(Vector3 contactPoint, bool sink, float strength)
         {
             Instantiate(splashParticle, contactPoint, Quaternion.identity);
 
@@ -205,7 +200,7 @@ namespace Bundos.WaterSystem
                 }
             }
 
-            springs[index].weightPosition = (sink ? Vector2.down : Vector2.up) * waveHeight;
+            springs[index].weightPosition = (sink ? Vector2.down : Vector2.up) * waveHeight * strength;
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -218,7 +213,7 @@ namespace Bundos.WaterSystem
             {
                 Vector2 contactPoint = other.ClosestPoint(transform.position);
 
-                Ripple(contactPoint, false);
+                Ripple(contactPoint, false, otherRigidbody.mass);
             }
         }
 
@@ -231,7 +226,7 @@ namespace Bundos.WaterSystem
             if (otherRigidbody != null)
             {
                 Vector2 contactPoint = other.ClosestPoint(transform.position);
-                Ripple(contactPoint, true);
+                Ripple(contactPoint, true, otherRigidbody.mass);
             }
         }
     }
