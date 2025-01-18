@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 270394267970809000, guid: 3fe42846fb4bc414b84401e88f8f9532, type: 3}
       propertyPath: m_LocalScale.y
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 270394267970809000, guid: 3fe42846fb4bc414b84401e88f8f9532, type: 3}
       propertyPath: m_LocalPosition.x
@@ -81,8 +81,12 @@ PrefabInstance:
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 270394267970809004, guid: 3fe42846fb4bc414b84401e88f8f9532, type: 3}
+      propertyPath: m_Density
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270394267970809004, guid: 3fe42846fb4bc414b84401e88f8f9532, type: 3}
       propertyPath: m_ColliderMask.m_Bits
-      value: 128
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 270394267970809005, guid: 3fe42846fb4bc414b84401e88f8f9532, type: 3}
       propertyPath: m_CastShadows
