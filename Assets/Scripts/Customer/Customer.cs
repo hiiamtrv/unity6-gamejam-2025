@@ -69,11 +69,13 @@ public class Customer : MonoBehaviour
         Invoke("Waiting", 1f);
         //DoneWaiting, leave
     }
+
     private void Leave() {
         Debug.Log("Left...");
-        Destroy(gameObject, 1f);
+        CustomerManager_test.Instance.RemoveCustomer(this.gameObject);
 
     }
+
     public void SubmitColor(int colorIndex)
     {
         if (colorIndex == _wishColorIndex)
