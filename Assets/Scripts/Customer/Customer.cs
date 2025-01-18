@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GameManager;
 using Level;
 using UnityEngine;
@@ -25,8 +26,8 @@ public class Customer : MonoBehaviour
 
     private void Awake()
     {
-        _minWaiting = 90f;
-        _maxWaiting = 100f;
+        _minWaiting = 10f;
+        _maxWaiting = 20f;
         _countdownTime = Random.Range(_minWaiting, _maxWaiting);
 
         emo.gameObject.SetActive(false);
@@ -109,9 +110,16 @@ public class Customer : MonoBehaviour
     private void Leave()
     {
         Debug.Log("Left...");
-
-        CustomerManager.Instance.RemoveCustomer(gameObject);
-        Destroy(gameObject, 3f);
+        hitCollider.enabled = false;
+        //CustomerManager.Instance.intialPos;
+        transform.DOMove(CustomerManager.Instance.intialPos.position, 8f)
+            .OnComplete(() =>
+            {
+                CustomerManager.Instance.RemoveCustomer(gameObject);
+                Destroy(gameObject, 3f);
+            });
+        //CustomerManager.Instance.RemoveCustomer(gameObject);
+        //Destroy(gameObject, 3f);
     }
 
     public void SubmitColor(int colorIndex)

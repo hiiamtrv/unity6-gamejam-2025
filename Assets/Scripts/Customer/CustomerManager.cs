@@ -13,7 +13,7 @@ public class CustomerManager : MonoBehaviour
     }
 
     [SerializeField] CustomerPos[] customerPosList;
-    [SerializeField] Transform intialPos;
+    public Transform intialPos;
     [SerializeField] GameObject customerPrefab;
 
     private float timeToSpawnMax = 3f;
