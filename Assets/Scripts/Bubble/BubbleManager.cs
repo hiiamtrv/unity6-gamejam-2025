@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,12 +99,12 @@ public class BubbleManager : MonoBehaviour
     {
         Bubble bubble1Component = bubble1.GetComponent<Bubble>();
         Bubble bubble2Component = bubble2.GetComponent<Bubble>();
-        int level1 = bubble1Component.Level;
-        int level2 = bubble2Component.Level;
+        int level1 = bubble1Component.level;
+        int level2 = bubble2Component.level;
         int newLevel = level1 + level2;
         GameObject newBubble = Instantiate(bubble);
         Bubble newComponent = newBubble.GetComponent<Bubble>();
-        newComponent.Level = newLevel;
+        newComponent.level = newLevel;
         newBubble.transform.position = (bubble1.transform.position + bubble2.transform.position) / 2;
 
         int bubble1ColorIndex = bubble1Component.GetColorIndex();
@@ -121,6 +122,12 @@ public class BubbleManager : MonoBehaviour
         }
 
         newComponent.SetColorIndex(((bubble1ColorIndex + bubble2ColorIndex) / 2) % 12);
+
+        /*bubble1.transform.DOMove(newBubble.transform.position, 0.5f);
+        bubble1.transform.DOScale(newBubble.transform.localScale, 0.5f);
+        bubble2.transform.DOMove(newBubble.transform.position, 0.5f);
+        bubble2.transform.DOScale(newBubble.transform.localScale, 0.5f);*/
+
         bubble1Component.Pop();
         bubble2Component.Pop();
     }
