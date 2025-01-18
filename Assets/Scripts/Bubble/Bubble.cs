@@ -112,6 +112,7 @@ public class Bubble : MonoBehaviour
 
     public void Pop()
     {
+        SFXManager.Instance.PlayPopSound();
         Destroy(gameObject);
     }
 

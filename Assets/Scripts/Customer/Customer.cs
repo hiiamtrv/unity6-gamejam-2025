@@ -72,7 +72,7 @@ public class Customer : MonoBehaviour
         
         hitCollider.enabled = false;
         magnet.gameObject.SetActive(false);
-
+        SFXManager.Instance.PlayHappySound();
         LevelManager.CustomerServed?.Invoke(1);
     }
 
@@ -93,7 +93,7 @@ public class Customer : MonoBehaviour
         
         hitCollider.enabled = true;
         magnet.gameObject.SetActive(false);
-        
+        SFXManager.Instance.PlayDisappointedSound();
         GameManager.GameManager.Instance.AddReputation(-1);
     }
 

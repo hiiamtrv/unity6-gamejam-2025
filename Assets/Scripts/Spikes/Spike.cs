@@ -12,6 +12,7 @@ namespace Spikes
             var layer = other.gameObject.layer;
             if (layer == bubbleLayer)
             {
+                SFXManager.Instance.PlayPopSound();
                 Destroy(other.gameObject);
             }
         }
