@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8359b1327d3e94428ee9e0ca67dc5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToSpawn: 4
+  timeToSpawn: 3
+  freezeTime: 5
   bubble: {fileID: 5396427750178322033, guid: 97be24059029c554982305aaf913475f, type: 3}
-  pointA: {fileID: 0}
-  pointB: {fileID: 0}
+  spawners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   listPosition: 
   list: []
