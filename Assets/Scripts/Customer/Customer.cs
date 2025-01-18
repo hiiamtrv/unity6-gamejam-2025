@@ -9,7 +9,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private float _minWaiting, _maxWaiting;
     [SerializeField] private ColorConfig colorConfig;
     [SerializeField] private CustomerEmo emo;
-    private SpriteRenderer[] customerSprites;
+    [SerializeField] private SpriteRenderer[] customerSprites;
 
     public void CustomerConfigure(int ColorIndex)
     {
@@ -23,8 +23,6 @@ public class Customer : MonoBehaviour
         _countdownTime = Random.Range(_minWaiting, _maxWaiting);
 
         emo.gameObject.SetActive(false);
-        
-        customerSprites = GetComponentsInChildren<SpriteRenderer>(true);
     }
 
     private void OnEnable()
