@@ -147,6 +147,7 @@ MonoBehaviour:
   - {fileID: 6185030799977097803}
   hitCollider: {fileID: -5418686934181089461}
   animator: {fileID: 2848434426969635878}
+  magnet: {fileID: 6232938169013929342}
 --- !u!70 &-5418686934181089461
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
