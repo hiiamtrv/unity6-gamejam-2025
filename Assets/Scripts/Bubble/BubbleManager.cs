@@ -88,8 +88,10 @@ public class BubbleManager : MonoBehaviour
         int level2 = bubble2Component.Level;
         int newLevel = level1 + level2;
         GameObject newBubble = Instantiate(bubble);
-        newBubble.GetComponent<Bubble>().Level = newLevel;
+        Bubble newComponent = newBubble.GetComponent<Bubble>();
+        newComponent.Level = newLevel;
         newBubble.transform.position = (bubble1.transform.position + bubble2.transform.position) / 2;
+        newComponent.SetColorIndex(((bubble1Component.GetColorIndex()+bubble2Component.GetColorIndex())/2 + 12) % 12);
         bubble1Component.Pop();
         bubble2Component.Pop();
     }

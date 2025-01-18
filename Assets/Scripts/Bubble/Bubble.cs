@@ -7,19 +7,35 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float horizontalSpeed = 2f;
     [SerializeField] private float timeToDestroy = 15f;
     [SerializeField] private float horizontalOffset = 2f;
+    [SerializeField] private ColorConfig colorSet;
     public int Level = 1;
 
-    // 16 colors
+    private SpriteRenderer bubbleSprite;
+
+    // 12 colors
+    private const int colorCount = 12;
     private int colorIndex;
 
     public int GetColorIndex() => colorIndex;
+    public void SetColorIndex(int index)
+    {
+        colorIndex = index;
+        bubbleSprite.color = colorSet.colors[colorIndex];
+    }
 
     private float beginTime;
 
+    private void Awake()
+    {
+        colorIndex = Random.Range(0, colorCount);
+        bubbleSprite = GetComponent<SpriteRenderer>();
+        bubbleSprite.color = colorSet.colors[colorIndex];
+    }
 
     private void Start()
     {
         BubbleManager.Instance.AddBubble(gameObject);
+
         if (Level >= 5)
         {
             Destroy(gameObject);
