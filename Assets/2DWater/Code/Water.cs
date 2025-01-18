@@ -50,7 +50,7 @@ namespace Bundos.WaterSystem
             };
 
             meshFilter = GetComponent<MeshFilter>();
-            meshFilter.mesh = mesh;
+            meshFilter.sharedMesh = mesh;
         }
 
         private void InitializeSprings()
