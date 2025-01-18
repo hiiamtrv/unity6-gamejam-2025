@@ -1,19 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
     [SerializeField] private float upSpeed = 5f;
     [SerializeField] private float horizontalSpeed = 2f;
+    [SerializeField] private float timeToDestroy = 15f;
     [SerializeField] private float horizontalOffset = 2f;
     public int Level = 1;
 
     // 16 colors
     private int colorIndex;
+
+    public int GetColorIndex() => colorIndex;
+
     private float beginTime;
+
 
     private void Start()
     {
-        if(Level >= 5)
+        BubbleManager.Instance.AddBubble(gameObject);
+        if (Level >= 5)
         {
             Destroy(gameObject);
         }
@@ -24,16 +31,16 @@ public class Bubble : MonoBehaviour
         upSpeed *= Level;
         upSpeed += offset;
         horizontalSpeed += offset;
-       
+
         //GetComponent<SpriteRenderer>().color = BubbleManager.Instance.colors[colorIndex];
     }
 
     private void Update()
     {
-        //if(Time.time - beginTime > 10f)         
-        //{
-        //    Destroy(gameObject);
-        //}
+        if (Time.time - beginTime > timeToDestroy)
+        {
+            Pop();
+        }
         //float lên từ từ và di chuyển ngang
         transform.position += Vector3.up * upSpeed * Time.deltaTime;
         transform.position += Vector3.right * Mathf.Cos(Time.time * horizontalSpeed) * horizontalOffset * Time.deltaTime;
@@ -46,10 +53,35 @@ public class Bubble : MonoBehaviour
             Debug.Log("Bubble hit Bubble");
             BubbleManager.Instance.MergeBubble(gameObject, collision.gameObject);
         }
-        else if(collision.gameObject.CompareTag("Customer"))
+        else if (collision.gameObject.CompareTag("Customer"))
         {
             Debug.Log("Bubble hit customer");
+            Pop();
         }
+    }
+
+    public void Freeze(float freezeTime)
+    {
+        StartCoroutine(FreezeCoroutine(freezeTime));
+    }
+
+    public IEnumerator FreezeCoroutine(float freezeTime)
+    {
+        float currentUpSpeed = upSpeed;
+        float currentHorizontalSpeed = horizontalSpeed;
+        float currentHorizontalOffset = horizontalOffset;
+        upSpeed = 0;
+        horizontalSpeed = 0;
+        horizontalOffset = 0;
+        yield return new WaitForSeconds(freezeTime);
+        upSpeed = currentUpSpeed;
+        horizontalSpeed = currentHorizontalSpeed;
+        horizontalOffset = currentHorizontalOffset;
+    }
+
+    public void Pop()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDestroy()
@@ -57,3 +89,5 @@ public class Bubble : MonoBehaviour
         BubbleManager.Instance.RemoveBubble(gameObject);
     }
 }
+
+
