@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Stack<GameObject> invisibleReputationScores = new Stack<GameObject>();
     [SerializeField] private GameObject starPrefab;
 
+    private Tween starDisappearAnimation;
+
     private int initialReputation;
     private int maxReputation;
 
@@ -50,8 +52,10 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        initialReputation = GameManager.GameManager.Instance.initialReputation;
-        maxReputation = GameManager.GameManager.Instance.maxReputation;
+        //initialReputation = GameManager.GameManager.Instance.initialReputation;
+        //maxReputation = GameManager.GameManager.Instance.maxReputation;
+        initialReputation = maxReputation = 5;
+
         CreateReputationScores(initialReputation);
 
         btnStart.transform.localScale = Vector3.zero;
@@ -59,6 +63,13 @@ public class UIManager : MonoBehaviour
 
         gameName.transform.localScale = Vector3.zero;
         gameName.transform.DOScale(1.0f, 2.0f).SetEase(Ease.OutBack);
+
+        foreach (var star in visibleReputationScores)
+        {
+            star.transform.DORotate(new Vector3(0, 0, 30), 0.5f)
+                     .SetEase(Ease.InOutSine)
+                     .SetLoops(-1, LoopType.Yoyo);
+        }
     }
 
     // Update is called once per frame
@@ -109,6 +120,8 @@ public class UIManager : MonoBehaviour
             GameObject star = GameObject.Instantiate(starPrefab);
             star.gameObject.transform.SetParent(reputationPanel.transform, true);
             star.transform.position = new Vector3(spawnStarPostition, reputationPanel.transform.position.y, 0) + new Vector3(50 * i, 0, 0);
+            star.transform.localScale = Vector3.zero;
+            StartStarAppearAnimation(star);
             visibleReputationScores.Push(star);
         }
     }
@@ -116,25 +129,26 @@ public class UIManager : MonoBehaviour
     float GetSpawnStarPostition(RectTransform rectTransform)
     {
         Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners); 
-                                                // corners[0]: Bottom Left
-                                                // corners[1]: Top Left
-                                                // corners[2]: Top Right
-                                                // corners[3]: Bottom Right
+        rectTransform.GetWorldCorners(corners);
+        // corners[0]: Bottom Left
+        // corners[1]: Top Left
+        // corners[2]: Top Right
+        // corners[3]: Bottom Right
 
         return corners[0].x;
     }
 
     public void UpdateReputationScores(int score)
     {
-        if (GameManager.GameManager.Instance.reputation > 0)
+        // (GameManager.GameManager.Instance.reputation > 0)
         {
-            if (invisibleReputationScores.Count > 0 && score > 0 && GameManager.GameManager.Instance.reputation < maxReputation)
+            if (invisibleReputationScores.Count > 0 && score > 0) //&& GameManager.GameManager.Instance.reputation < maxReputation
             {
                 for (int i = 0; i < score; i++)
                 {
                     GameObject star = invisibleReputationScores.Pop();
                     star.SetActive(true);
+                    StartStarAppearAnimation(star);
                     visibleReputationScores.Push(star);
                 }
             }
@@ -143,8 +157,7 @@ public class UIManager : MonoBehaviour
                 for (int i = 0; i < Mathf.Abs(score); i++)
                 {
                     GameObject star = visibleReputationScores.Pop();
-                    star.SetActive(false);
-                    invisibleReputationScores.Push(star);
+                    StartStarDisppearAnimation(star);
                 }
             }
         }
@@ -166,5 +179,31 @@ public class UIManager : MonoBehaviour
     public void HideGameOverPanel()
     {
         gameOverPanel.SetActive(false);
+    }
+
+    public void MinusStar()
+    {
+        UpdateReputationScores(-1);
+    }
+
+    public void PlusStar()
+    {
+        UpdateReputationScores(1);
+    }
+
+    void StartStarAppearAnimation(GameObject star)
+    {
+        star.transform.DOScale(1.0f, 1.0f).SetEase(Ease.OutBack);
+    }
+
+    void StartStarDisppearAnimation(GameObject star)
+    {
+        star.gameObject.transform.DOScale(1.5f, 0.5f).SetEase(Ease.OutBack);
+        star.gameObject.transform.DOScale(0, 0.5f)
+                  .SetEase(Ease.InBack).OnComplete(() =>
+                  {
+                      star.SetActive(false);
+                      invisibleReputationScores.Push(star);
+                  });
     }
 }
