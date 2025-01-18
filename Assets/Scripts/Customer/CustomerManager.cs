@@ -1,4 +1,5 @@
 using DG.Tweening;
+using DG.Tweening.Core;
 using UnityEngine;
 
 public class CustomerManager : MonoBehaviour
@@ -61,13 +62,20 @@ public class CustomerManager : MonoBehaviour
                 Sequence sequence = DOTween.Sequence();
 
                 // Move to the target position
-                sequence.Append(customerSpawned.transform.DOMove(customerPosList[i].pos.position, 2f)
-                    .SetEase(Ease.Linear)); // Linear movement
+                customerSpawned.transform.DOMove(customerPosList[i].pos.position, 2f)
+                    .SetEase(Ease.Linear)
+                    .OnComplete(() =>
+                    {
+                        customerSpawned.transform.DORotate(new Vector3(0, 0, 15), 0.25f) // Rotate to 15 degrees
+                            .SetLoops(-1, LoopType.Yoyo) // Sway back and forth
+                            .SetEase(Ease.InOutSine)
+                            .OnStart(() =>
+                            {
+                                Debug.Log("OKKKK");
+                                customerSpawned.SendMessage("ShowingWishColor", SendMessageOptions.DontRequireReceiver);
+                            });
+                    });
 
-                // Add a swaying effect (rock back and forth as they move)
-                sequence.Join(customerSpawned.transform.DORotate(new Vector3(0, 0, 15), 0.25f) // Rotate to 15 degrees
-                    .SetLoops(-1, LoopType.Yoyo) // Sway back and forth
-                    .SetEase(Ease.InOutSine)); // Smooth easing for sway
 
                 customerPosList[i].isTaking = true;
                 customerPosList[i].customerGameObject = customerSpawned;
@@ -82,7 +90,7 @@ public class CustomerManager : MonoBehaviour
         {
             if (customerPosList[i].customerGameObject == gameObject)
             {
-                Destroy(customerPosList[i].customerGameObject);
+                // Destroy(customerPosList[i].customerGameObject);
                 customerPosList[i].isTaking = false;
             }
         }

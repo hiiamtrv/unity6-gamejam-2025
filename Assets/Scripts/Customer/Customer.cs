@@ -7,6 +7,8 @@ public class Customer : MonoBehaviour
     [Header("Values")] [SerializeField] private int _wishColorIndex;
     [SerializeField] private float _countdownTime;
     [SerializeField] private float _minWaiting, _maxWaiting;
+    [SerializeField] private ColorConfig colorConfig;
+    [SerializeField] private CustomerEmo emo;
     
     public void CustomerConfigure(int ColorIndex)
     {
@@ -18,6 +20,8 @@ public class Customer : MonoBehaviour
         _minWaiting = 90f;
         _maxWaiting = 100f;
         _countdownTime = Random.Range(_minWaiting, _maxWaiting);
+        
+        emo.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -48,6 +52,7 @@ public class Customer : MonoBehaviour
     {
         //Show satisfaction
         Debug.Log("I like this");
+        emo.ShowHappyEmo();
 
         LevelManager.CustomerServed?.Invoke(1);
     }
@@ -63,19 +68,20 @@ public class Customer : MonoBehaviour
         //     gameManager.AddReputation(10); // Add 10 to reputation
         //     Debug.Log("Added 10 reputation.");
         //}
+        emo.ShowSadEmo();
     }
 
-    private void ShowingWishColor()
+    public void ShowingWishColor()
     {
         //Change ColorIndex to real color
         Debug.Log("My favourite color is" + _wishColorIndex.ToString());
+        emo.ShowColorEmo(colorConfig.colors[_wishColorIndex]);
         //Delay;
     }
 
     private void Update()
     {
         //CustomerAppear
-        ShowingWishColor();
         //Waiting
         Invoke("Waiting", 1f);
         //DoneWaiting, leave
@@ -86,7 +92,7 @@ public class Customer : MonoBehaviour
         Debug.Log("Left...");
         
         CustomerManager.Instance.RemoveCustomer(gameObject);
-        // Destroy(gameObject, 1f);
+        Destroy(gameObject, 3f);
     }
 
     public void SubmitColor(int colorIndex)
