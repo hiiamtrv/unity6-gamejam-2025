@@ -69,7 +69,11 @@ public class Bubble : MonoBehaviour
     {
         Debug.Log(collision.gameObject.name + " " + collision.gameObject.tag + " collided with " + gameObject.tag);
 
-        if (collision.gameObject.CompareTag("Bubble") && GetInstanceID() < collision.gameObject.GetInstanceID())
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player Collided");
+        }
+        else if (collision.gameObject.CompareTag("Bubble") && GetInstanceID() < collision.gameObject.GetInstanceID())
         {
             BubbleManager.Instance.MergeBubble(gameObject, collision.gameObject);
         }
