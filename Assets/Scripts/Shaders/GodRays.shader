@@ -8,6 +8,7 @@
         _RayWidth ("Ray Width", Range(1, 20)) = 10
         _RayAngle ("Ray Angle", Range(-1, 1)) = 0.3
         _BottomBrightness ("Bottom Brightness", Range(1, 10)) = 3
+        _AlphaCutoff ("Alpha Cutoff", Range(0, 1)) = 0
     }
     
     SubShader
@@ -47,6 +48,7 @@
             float _RayWidth;
             float _RayAngle;
             float _BottomBrightness;
+            float _AlphaCutoff;
 
             float hash(float2 p)
             {
@@ -110,6 +112,8 @@
                 
                 // Apply intensity and create final color
                 float4 finalColor = _RayColor * ray * _RayIntensity;
+
+                if (finalColor.w < _AlphaCutoff * edgeFade) return float4(0.0, 0.0, 0.0, 0.0);
                 
                 return finalColor;
             }

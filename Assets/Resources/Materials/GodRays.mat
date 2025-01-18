@@ -41,7 +41,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaCutoff: 0.05
     - _BottomBrightness: 6
+    - _Cutoff: 0
     - _EnableExternalAlpha: 0
     - _NoiseSpeed: 10
     - _RayAngle: -0.3
@@ -51,6 +53,7 @@ Material:
     - _RayLength: 0.5
     - _RaySpeed: 0.1
     - _RaySpread: 1
+    - _RayVariation: 0.5
     - _RayWidth: 6.5
     - _TopBrightness: 1
     - _ZWrite: 0
