@@ -3,11 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-
   tags:
   - Bubble
   - Customer
-
   layers:
   - Default
   - TransparentFX

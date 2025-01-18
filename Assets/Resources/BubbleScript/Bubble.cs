@@ -30,10 +30,10 @@ public class Bubble : MonoBehaviour
 
     private void Update()
     {
-        if(Time.time - beginTime > 10f)         
-        {
-            Destroy(gameObject);
-        }
+        //if(Time.time - beginTime > 10f)         
+        //{
+        //    Destroy(gameObject);
+        //}
         //float lên từ từ và di chuyển ngang
         transform.position += Vector3.up * upSpeed * Time.deltaTime;
         transform.position += Vector3.right * Mathf.Cos(Time.time * horizontalSpeed) * horizontalOffset * Time.deltaTime;

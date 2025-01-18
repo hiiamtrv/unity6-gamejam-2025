@@ -6,7 +6,7 @@ public class BallGrab : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float ballDetectRadius;
     [SerializeField] private Vector2 ballDetectOffset;
-    [SerializeField] private LayerMask ballLayer;
+    [SerializeField] private LayerMask bubbleLayer;
     [SerializeField] private float forceOnBallRelease;
     private Collider2D detectedBallCollider;
 
@@ -19,7 +19,7 @@ public class BallGrab : MonoBehaviour
     {
         if (!isGrabbingBall)
         {
-            detectedBallCollider = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(ballDetectOffset.x * transform.localScale.x, ballDetectOffset.y), ballDetectRadius, ballLayer);
+            detectedBallCollider = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(ballDetectOffset.x * transform.localScale.x, ballDetectOffset.y), ballDetectRadius, bubbleLayer);
             if (detectedBallCollider && Input.GetKeyDown(KeyCode.C))
             {
                 isGrabbingBall = true;
@@ -29,6 +29,12 @@ public class BallGrab : MonoBehaviour
         }
         else
         {
+            if (!detectedBallCollider)
+            {
+                isGrabbingBall = false;
+                return;
+            }
+
             if (Input.GetKeyUp(KeyCode.C))
             {
                 isGrabbingBall = false;
