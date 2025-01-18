@@ -52,9 +52,8 @@ public class UIManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //initialReputation = GameManager.GameManager.Instance.initialReputation;
-        //maxReputation = GameManager.GameManager.Instance.maxReputation;
-        initialReputation = maxReputation = 5;
+        initialReputation = GameManager.GameManager.Instance.initialReputation;
+        maxReputation = GameManager.GameManager.Instance.maxReputation;
 
         CreateReputationScores(initialReputation);
 
@@ -140,9 +139,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateReputationScores(int score)
     {
-        // (GameManager.GameManager.Instance.reputation > 0)
+        if(GameManager.GameManager.Instance.reputation > 0)
         {
-            if (invisibleReputationScores.Count > 0 && score > 0) //&& GameManager.GameManager.Instance.reputation < maxReputation
+            if (invisibleReputationScores.Count > 0 && score > 0 && GameManager.GameManager.Instance.reputation < maxReputation) 
             {
                 for (int i = 0; i < score; i++)
                 {
@@ -179,16 +178,6 @@ public class UIManager : MonoBehaviour
     public void HideGameOverPanel()
     {
         gameOverPanel.SetActive(false);
-    }
-
-    public void MinusStar()
-    {
-        UpdateReputationScores(-1);
-    }
-
-    public void PlusStar()
-    {
-        UpdateReputationScores(1);
     }
 
     void StartStarAppearAnimation(GameObject star)
