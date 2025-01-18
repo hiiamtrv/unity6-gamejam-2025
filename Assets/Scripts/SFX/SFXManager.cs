@@ -1,11 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
     public static SFXManager Instance { get; private set; } 
-    public AudioSource[] RandomAudio;
-    public AudioSource[] HappyClips;
-    public AudioSource[] DisappointedClips;
+    public AudioSource Player;
+    public AudioClip[] SFX;
     private void Awake()
     {
         if (Instance == null)
@@ -19,32 +19,33 @@ public class SFXManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void LoadCLipIntoPlayer(int Index)
+    {
+        Player.clip = SFX[Index];
+    }
     public void PlayPopSound()
     {
-        RandomAudio[0].Play();
+        Player.PlayOneShot(SFX[0], 1f);
     }
     public void PlayDisappointedSound()
     {
-        DisappointedClips[0].Play();
+        int rng = Random.Range(1, 7);
+        Player.PlayOneShot(SFX[rng], 1f);
     }
     public void PlayHappySound()
     {
-        HappyClips[0].Play();
+        int rng = Random.Range(7, 11);
+        Player.PlayOneShot(SFX[rng], 1f);
     }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            PlayPopSound();
-        }
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             PlayHappySound();
         }
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             PlayDisappointedSound();
         }
-
     }
 }
