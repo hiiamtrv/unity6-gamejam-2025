@@ -9,7 +9,8 @@ public class Customer : MonoBehaviour
     [SerializeField] private float _minWaiting, _maxWaiting;
     [SerializeField] private ColorConfig colorConfig;
     [SerializeField] private CustomerEmo emo;
-    
+    private SpriteRenderer[] customerSprites;
+
     public void CustomerConfigure(int ColorIndex)
     {
         _wishColorIndex = ColorIndex;
@@ -20,8 +21,10 @@ public class Customer : MonoBehaviour
         _minWaiting = 90f;
         _maxWaiting = 100f;
         _countdownTime = Random.Range(_minWaiting, _maxWaiting);
-        
+
         emo.gameObject.SetActive(false);
+        
+        customerSprites = GetComponentsInChildren<SpriteRenderer>(true);
     }
 
     private void OnEnable()
@@ -90,13 +93,14 @@ public class Customer : MonoBehaviour
     private void Leave()
     {
         Debug.Log("Left...");
-        
+
         CustomerManager.Instance.RemoveCustomer(gameObject);
         Destroy(gameObject, 3f);
     }
 
     public void SubmitColor(int colorIndex)
     {
+        ChangeColor(colorIndex);
         if (colorIndex == _wishColorIndex)
         {
             Satisfied();
@@ -106,6 +110,14 @@ public class Customer : MonoBehaviour
         {
             Angry();
             Leave();
+        }
+    }
+
+    private void ChangeColor(int colorIndex)
+    {
+        foreach (var spriteRenderer in customerSprites)
+        {
+            spriteRenderer.color = colorConfig.colors[colorIndex];
         }
     }
 }

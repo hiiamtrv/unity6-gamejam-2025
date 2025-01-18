@@ -110,6 +110,8 @@ MonoBehaviour:
   _maxWaiting: 0
   colorConfig: {fileID: 11400000, guid: 8ac5da3a764e6d149b9ba12069bf2747, type: 2}
   emo: {fileID: 4870079363690859847}
+  customerSprites:
+  - {fileID: 5884696995132544463}
 --- !u!70 &-5418686934181089461
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
