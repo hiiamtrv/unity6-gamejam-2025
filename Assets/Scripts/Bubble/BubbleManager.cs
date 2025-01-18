@@ -24,14 +24,15 @@ public class BubbleManager : MonoBehaviour
     [SerializeField] private float timeToSpawn = 4f;
     [SerializeField] private float freezeTime = 5f;
     [SerializeField] private GameObject bubble;
-    [SerializeField] private GameObject pointA;
-    [SerializeField] private GameObject pointB;
-    [SerializeField] private const int bubbleCount = 6;
+    [SerializeField] private List<GameObject> spawners; 
+    [SerializeField] private int bubbleCount = 6;
     [SerializeField] private List<int> listPosition = new List<int>();
     [SerializeField] private List<GameObject> list = new List<GameObject>();
+
     private float timer = 0;
     void Start()
     {
+        bubbleCount = spawners.Count;
         for (int i = 0; i < bubbleCount; i++)
         {
             listPosition.Add(i);
@@ -67,7 +68,7 @@ public class BubbleManager : MonoBehaviour
         for (int i = 0; i < randomAmountBubble; i++)
         {
             GameObject newBubble = Instantiate(bubble);
-            newBubble.transform.position = new Vector2((pointB.transform.position.x - pointA.transform.position.x) / bubbleCount * listPosition[i] + pointA.transform.position.x, pointA.transform.position.y);
+            newBubble.transform.position = new Vector2(spawners[listPosition[i]].transform.position.x, spawners[listPosition[i]].transform.position.y);
         }
     }
 
