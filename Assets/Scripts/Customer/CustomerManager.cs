@@ -13,7 +13,7 @@ public class CustomerManager : MonoBehaviour
     }
 
     [SerializeField] CustomerPos[] customerPosList;
-    [SerializeField] Transform intialPos;
+    public Transform intialPos;
     [SerializeField] GameObject customerPrefab;
 
     private float timeToSpawnMax = 3f;
@@ -65,6 +65,7 @@ public class CustomerManager : MonoBehaviour
                     .OnComplete(() =>
                     {
                         customerSpawned.SendMessage("ShowingWishColor", SendMessageOptions.DontRequireReceiver);
+                        customerSpawned.GetComponentInChildren<Animator>().Play("Idle");
                     });
 
 

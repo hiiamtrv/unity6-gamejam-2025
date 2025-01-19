@@ -147,6 +147,7 @@ MonoBehaviour:
   - {fileID: 6185030799977097803}
   hitCollider: {fileID: -5418686934181089461}
   animator: {fileID: 2848434426969635878}
+  magnet: {fileID: 6232938169013929342}
 --- !u!70 &-5418686934181089461
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -698,12 +699,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -40
-  m_Sprite: {fileID: -1142589347, guid: a21b6b4363f14da41a7ee142349966ae, type: 3}
+  m_Sprite: {fileID: -1631221991, guid: a21b6b4363f14da41a7ee142349966ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.77000004, y: 0.11}
+  m_Size: {x: 0.72999996, y: 0.43}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

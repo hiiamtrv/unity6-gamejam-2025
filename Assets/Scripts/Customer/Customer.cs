@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GameManager;
 using Level;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private SpriteRenderer[] customerSprites;
     [SerializeField] private Collider2D hitCollider;
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject magnet;
 
     private int FunWalk = Animator.StringToHash("Fun_Walk");
     private int Idle = Animator.StringToHash("Idle");
@@ -25,18 +27,19 @@ public class Customer : MonoBehaviour
 
     private void Awake()
     {
-        _minWaiting = 90f;
-        _maxWaiting = 100f;
+        _minWaiting = 10f;
+        _maxWaiting = 20f;
         _countdownTime = Random.Range(_minWaiting, _maxWaiting);
 
         emo.gameObject.SetActive(false);
+        magnet.gameObject.SetActive(false);
         hitCollider.enabled = false;
     }
 
     private void OnEnable()
     {
         // _wishColorIndex = RandomFavouriteColorIndex();
-        animator.Play(FunWalk);
+        animator.Play(SadAppear);
     }
 
     private int RandomFavouriteColorIndex()
@@ -65,6 +68,10 @@ public class Customer : MonoBehaviour
         emo.gameObject.SetActive(true);
         emo.ShowHappyEmo();
         animator.Play(Cheer);
+        animator.Play(FunWalk);
+        
+        hitCollider.enabled = false;
+        magnet.gameObject.SetActive(false);
 
         LevelManager.CustomerServed?.Invoke(1);
     }
@@ -82,8 +89,12 @@ public class Customer : MonoBehaviour
         //}
         emo.gameObject.SetActive(true);
         emo.ShowSadEmo();
-
         animator.Play(SadAppear);
+        
+        hitCollider.enabled = true;
+        magnet.gameObject.SetActive(false);
+        
+        GameManager.GameManager.Instance.AddReputation(-1);
     }
 
     public void ShowingWishColor()
@@ -93,9 +104,10 @@ public class Customer : MonoBehaviour
 
         emo.gameObject.SetActive(true);
         emo.ShowColorEmo(colorConfig.colors[_wishColorIndex]);
-        hitCollider.enabled = true;
         animator.Play(Idle);
         //Delay;
+        hitCollider.enabled = true;
+        magnet.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -109,9 +121,16 @@ public class Customer : MonoBehaviour
     private void Leave()
     {
         Debug.Log("Left...");
-
-        CustomerManager.Instance.RemoveCustomer(gameObject);
-        Destroy(gameObject, 3f);
+        hitCollider.enabled = false;
+        //CustomerManager.Instance.intialPos;
+        transform.DOMove(CustomerManager.Instance.intialPos.position, 8f)
+            .OnComplete(() =>
+            {
+                CustomerManager.Instance.RemoveCustomer(gameObject);
+                Destroy(gameObject, 3f);
+            });
+        //CustomerManager.Instance.RemoveCustomer(gameObject);
+        //Destroy(gameObject, 3f);
     }
 
     public void SubmitColor(int colorIndex)

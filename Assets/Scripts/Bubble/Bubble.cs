@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class Bubble : MonoBehaviour
@@ -6,9 +7,11 @@ public class Bubble : MonoBehaviour
     [SerializeField] private float upSpeed = 5f;
     [SerializeField] private float horizontalSpeed = 2f;
     [SerializeField] private float timeToDestroy = 15f;
+    [SerializeField] private float scaleTime = 1.3f;
     [SerializeField] private float horizontalOffset = 2f;
+    [SerializeField] private float bubbleSizeIncrease = 0.3f;
     [SerializeField] private ColorConfig colorSet;
-    public int Level = 1;
+    public int level = 1;
 
     private SpriteRenderer bubbleSprite;
 
@@ -37,15 +40,13 @@ public class Bubble : MonoBehaviour
     {
         BubbleManager.Instance.AddBubble(gameObject);
 
-        if (Level >= 5)
-        {
-            Destroy(gameObject);
-        }
-
         beginTime = Time.time;
-        gameObject.transform.localScale = new Vector3(Level, Level, 1);
+        Vector3 newScale = new Vector3(1, 1, 1);
+        if(level >= 2)
+            newScale = new Vector3(1 + (level-1) * bubbleSizeIncrease, 1 + (level - 1) * bubbleSizeIncrease, 1);
+        transform.DOScale(newScale, scaleTime);
         float offset = Random.Range(-0.5f, 0.5f);
-        upSpeed *= Level;
+        upSpeed *= level;
         upSpeed += offset;
         horizontalSpeed += offset;
 
@@ -55,6 +56,11 @@ public class Bubble : MonoBehaviour
     private void Update()
     {
         if (Time.time - beginTime > timeToDestroy)
+        {
+            Pop();
+        }
+
+        if(Time.time - beginTime > scaleTime && level >= 5 )
         {
             Pop();
         }
@@ -69,7 +75,11 @@ public class Bubble : MonoBehaviour
     {
         Debug.Log(collision.gameObject.name + " " + collision.gameObject.tag + " collided with " + gameObject.tag);
 
-        if (collision.gameObject.CompareTag("Bubble") && GetInstanceID() < collision.gameObject.GetInstanceID())
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player Collided");
+        }
+        else if (collision.gameObject.CompareTag("Bubble") && GetInstanceID() < collision.gameObject.GetInstanceID())
         {
             BubbleManager.Instance.MergeBubble(gameObject, collision.gameObject);
         }

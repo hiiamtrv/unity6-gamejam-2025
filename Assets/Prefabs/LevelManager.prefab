@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages:
-  - customerRequired: 5
+  - customerRequired: 3
     colorIndexPool: 00000000
     colorRequestPool: 00000000
     maxBubbles: 2
